@@ -4,6 +4,8 @@ import { CreateMockInterview } from '@/app/_actions/interview';
 import { CreateMockMcq } from '@/app/_actions/mcq';
 import { CreateMockCodingRound } from '@/app/_actions/coding';
 
+export const maxDuration = 60; // 60 seconds to prevent Vercel 504 Timeouts
+
 export async function POST(req) {
   try {
     const user = await currentUser();
