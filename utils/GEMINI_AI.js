@@ -1,6 +1,13 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const apiKey = process.env.GEMINI_API_KEY || "dummy_key_to_bypass_build";
+const apiKey = (typeof process !== 'undefined' && process.env.GEMINI_API_KEY) 
+  ? process.env.GEMINI_API_KEY 
+  : "dummy_key_to_bypass_build";
+
+if (!apiKey) {
+  throw new Error("Critical: Gemini API Key fallback failed to assign.");
+}
+
 const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
